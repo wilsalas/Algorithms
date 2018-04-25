@@ -1,7 +1,7 @@
 let students = [
     {
         "name": "User1",
-        "note": 1,
+        "note": 1.1,
     },
     {
         "name": "User2",
@@ -9,7 +9,7 @@ let students = [
     },
     {
         "name": "User3",
-        "note": 3,
+        "note": 3.5,
     }
 ],
     name = document.getElementById("name"),
@@ -42,20 +42,20 @@ let students = [
             })
             document.getElementById("tbody").innerHTML = listStudent;
         },
-        ShowMaxNote: function () {
-            students.reduce(function (max, x) {
-                console.log(
-                    (x.note > max) ? x.note : max
-                )
-            }, 0)
-            // var lowest = Number.POSITIVE_INFINITY;
-            // var highest = Number.NEGATIVE_INFINITY;
-            // var tmp;
-            // for (var i = students.length - 1; i >= 0; i--) {
-            //     tmp = students[i].Cost;
-            //     if (tmp < lowest) lowest = tmp;
-            //     if (tmp > highest) highest = tmp;
-            // }
-            // console.log(highest, lowest);
+        ShowMaxMinNote: function (isMaxNote) {
+            let notes = Object.keys(students).map(key => students[key].note);
+            alert(isMaxNote ? "Maximum note: " + Math.max(...notes) : "Minimum note: " + Math.min(...notes))
+        },
+        ShowAverage: function () {
+            let sumTotalNotes = Object.keys(students).reduce((next, key) => {
+                return next + students[key].note;
+            }, 0);
+            alert(`
+                Total sum of notes:  ${sumTotalNotes} 
+
+                Total amount of notes:  ${students.length}
+
+                Average of notes (${sumTotalNotes} / ${students.length}) :  ${Math.round((sumTotalNotes / students.length) * 100) / 100}
+            `)
         }
     }
